@@ -1,0 +1,31 @@
+{
+  "name": "brewery",
+  "version": "1.0.0",
+  "description": "beer drinking game",
+  "main": "home.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbedilio/brewery.git"
+  },
+  "keywords": [
+    "brew",
+    "brewery",
+    "beer",
+    "beers"
+  ],
+  "author": "joshuambedilion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbedilio/brewery/issues"
+  },
+  "homepage": "https://github.com/jbedilio/brewery#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "express-handlebars": "^3.0.0"
+  }
+}
