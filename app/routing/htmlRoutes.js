@@ -23,6 +23,7 @@ function htmlR(app, __dirname, brew) {
     
     });
 
-    console.log("yo, from the html hizzy!");
+    console.log("Yo, from the html hizzy!");
 }
 
+module.exports = htmlR;

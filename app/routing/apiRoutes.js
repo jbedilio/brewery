@@ -12,4 +12,17 @@ const mt = require('./../models/mtBottle.js');
 
 function apiR(app, __dirname, brew) {
 
+    app.get('/api/brew', (req, res) => {
+
+        res.json(brew);
+    })
+
+    app.post('/api/beer30', (req, res) => {
+
+        res.json(beer);
+    })
+
+    console.log('Yo, from the api hizzy!');
 }
+
+module.exports = apiR;

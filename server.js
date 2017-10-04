@@ -22,7 +22,7 @@ htmlR(app, __dirname);
 
 const apiR = require('./app/routing/apiRoutes.js');
 
-apiR(app, __dirname, brew);
+apiR(app, __dirname, beer);
 
 app.listen(PORT, () => {
 
