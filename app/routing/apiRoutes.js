@@ -19,7 +19,7 @@ function apiR(app, __dirname, brew) {
 
     app.post('/api/beer30', (req, res) => {
 
-        res.json(beer);
+        res.send(beer);
     })
 
     console.log('Yo, from the api hizzy!');
