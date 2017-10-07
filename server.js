@@ -10,14 +10,17 @@ const app = express();
 //setting the dynamic port
 const PORT = process.env.PORT || 3000;
 
+//using a static route for the public directory for css content
+app.use(express.static("public"));
+
 //setting express to use bodyParser
 app.use(bp.urlencoded({ extended: true }));
 
 app.use(bp.json());
 
 //requiring the javascript files with the data
-//const beer = require('./app/models/beer.js');
-//const mt = require('./app/models/mtBottle.js');
+const beer = require('./app/data/beer.js');
+const mt = require('./app/data/mtBottle.js');
 
 //requiring handlebars
 const exphb = require('express-handlebars');
@@ -38,7 +41,10 @@ const conn = mysql.createConnection({
 });
 
 //establish the connection for mysql
-conn.connect(() => {
+conn.connect((error) => {
+    if (error){
+        throw error;
+    }
     console.log('connected as id ' + conn.threadId);
 });
 
@@ -47,14 +53,24 @@ conn.on('error', (err) => {
     console.log('shiz, I errored', err.code);
 });
 
-conn.query('beersDB');
+ app.get('/', (req, res) => {
+    
+    conn.query('SELECT * FROM beer;', (error, data) => {
+        
+        if (error){
+            throw error;
+        }
+
+        res.render('index', {beer: data});
+    });
+});
 
 //importing my route modules & calling the functions that house them
-/*const htmlR = require('./app/routing/htmlRoutes.js');
-htmlR(app, __dirname);
+// const htmlR = require('./app/routing/htmlRoutes.js');
+// htmlR(app, __dirname);
 
-const apiR = require('./app/routing/apiRoutes.js');
-apiR(app, __dirname);*/
+// const apiR = require('./app/routing/apiRoutes.js');
+// apiR(app, __dirname);
 
 //setting the server to listen to the dynamic port
 app.listen(PORT, () => {

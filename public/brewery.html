@@ -5,27 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/assets/reset.css" type="text/css" rel="stylesheet">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/style.css" type="text/css" rel="stylesheet">
     <title>Document</title>
 </head>
 
-<body style="height: 100%; display: flex; flex-direction: column;">
-    <div class="container" style="background: url('https://media.timeout.com/images/103378058/image.jpg')
+<body>
+    <div class="container one" style="background: url('https://media.timeout.com/images/103378058/image.jpg')
     repeat-y center;">
         <section class="container">
-            <div class="row"> </div>
+            <div class="row">
                 <div class="col-lg-4 text-center" id="full-beer">
                 </div>
-                <-- bar -->
+                <!-- bar -->
                 <div class="col-lg-4 text-center">
+                <form action="/api" method="POST">
                     What can I get you?:<br>
-                    <-- text input -->
-                    <input type="text" name="name" id="bartender"><br>
-                    <-- submit drink order area -->
+                    <!-- text input -->
+                    <textarea type="text" name="name" id="bartender"></textarea><br>
+                    <!-- submit drink order area -->
                     <button type="button" class="btn btn-danger btn-block" id="submit">Submit</button>
+                </form>
                 </div>
-                <-- bottle recycling -->
+                <!-- bottle recycling -->
                 <div class="col-lg-4 text-center" id="mt-beer">
                 </div>
         </section>

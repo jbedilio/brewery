@@ -1,0 +1,34 @@
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<br><br><br><br>
+<section class="container">
+    <div class="row">
+        <div class="col-lg-4 text-center" id="full-beer">
+            <ol>
+                {{#each beer}}
+                <li>
+                    <p>
+                    {{this.id}}.{{this.beer}}
+                    <button data-beer='{{this.id}}' id="chug">Chug it!</button>
+                    </p>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+        <!-- bar -->
+        <div class="col-lg-4 text-center">
+            <form action="/" method="POST">
+                What can I get you?:<br>
+                <!-- text input -->
+                <textarea type="text" name="name" id="bartender"></textarea><br>
+                <!-- submit drink order area -->
+                <button type="button" class="btn btn-danger btn-block" id="submit">Submit</button>
+            </form>
+        </div>
+        <!-- bottle recycling -->
+        <div class="col-lg-4 text-center" id="mt-beer">
+        </div>
+    </div>
+</section>
