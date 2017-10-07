@@ -34,7 +34,7 @@ const conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: "",
-    database: 'beerDB'
+    database: 'beersDB'
 });
 
 //establish the connection for mysql
@@ -47,7 +47,7 @@ conn.on('error', (err) => {
     console.log('shiz, I errored', err.code);
 });
 
-conn.query('beerDB');
+conn.query('beersDB');
 
 //importing my route modules & calling the functions that house them
 /*const htmlR = require('./app/routing/htmlRoutes.js');
@@ -60,4 +60,4 @@ apiR(app, __dirname);*/
 app.listen(PORT, () => {
 
     console.log('listening to PORT: ' + PORT);
-})
+});
