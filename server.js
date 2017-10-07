@@ -64,14 +64,23 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/', (req, res) => {
-    
-    conn.query('INSERT INTO beer (beer) VALUES (?)', [req.body.beer], (error, res) => {
-        
-        if (error) throw error;
+app.post('/new', (req, res) => {
 
-        res.redirect('/');
+    console.log(req.body.beer);
+
+    conn.query('INSERT INTO beer (beer) VALUES ("' + [req.body.beer] + '")', function (err, result) {
+
+        if (err) { throw err; }
+
+        res.redirect("/");
     });
+    
+    // conn.query('INSERT INTO beer (beer) VALUES (?)', [req.body.beer], (error, res) => {
+        
+    //     if (error) throw error;
+
+    //     res.redirect('/');
+    // });
 });
 
 //importing my route modules & calling the functions that house them
