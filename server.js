@@ -3,7 +3,7 @@ const express = require('express');
 
 const bp = require('body-parser');
 
-const path = require('path');
+//const path = require('path');
 
 //setting an instance of express
 const app = express();
@@ -19,8 +19,8 @@ app.use(bp.urlencoded({ extended: true }));
 app.use(bp.json());
 
 //requiring the javascript files with the data
-const beer = require('./app/data/beer.js');
-const mt = require('./app/data/mtBottle.js');
+// const beer = require('./app/data/beer.js');
+// const mt = require('./app/data/mtBottle.js');
 
 //requiring handlebars
 const exphb = require('express-handlebars');
@@ -48,20 +48,29 @@ conn.connect((error) => {
     console.log('connected as id ' + conn.threadId);
 });
 
-conn.on('error', (err) => {
+// conn.on('error', (err) => {
 
-    console.log('shiz, I errored', err.code);
+//     console.log('shiz, I errored', err.code);
+// });
+
+app.get('/', (req, res) => {
+
+    conn.query('SELECT * FROM beer WHERE status="0";', (error, data) => {
+
+        if (error) throw error;
+
+        //console.log(data);
+        res.render('index', {beer: data});
+    });
 });
 
- app.get('/', (req, res) => {
+app.post('/', (req, res) => {
     
-    conn.query('SELECT * FROM beer;', (error, data) => {
+    conn.query('INSERT INTO beer (beer) VALUES (?)', [req.body.beer], (error, res) => {
         
-        if (error){
-            throw error;
-        }
+        if (error) throw error;
 
-        res.render('index', {beer: data});
+        res.redirect('/');
     });
 });
 

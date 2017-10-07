@@ -2,33 +2,54 @@
 <br><br><br><br>
 <br><br><br><br>
 <br><br><br><br>
-<br><br><br><br>
 <section class="container">
     <div class="row">
         <div class="col-lg-4 text-center" id="full-beer">
             <ol>
                 {{#each beer}}
-                <li>
+                <ul>
                     <p>
-                    {{this.id}}.{{this.beer}}
-                    <button data-beer='{{this.id}}' id="chug">Chug it!</button>
+                        <textarea>{{this.id}}. {{this.beer}}</textarea>
+                        <button data-beer='{{this.status}}' id="chug">Chug it!</button>
                     </p>
-                </li>
+                </ul>
                 {{/each}}
             </ol>
         </div>
         <!-- bar -->
         <div class="col-lg-4 text-center">
-            <form action="/" method="POST">
-                What can I get you?:<br>
+            <form action="/" method="POST" id="bartender">
                 <!-- text input -->
-                <textarea type="text" name="name" id="bartender"></textarea><br>
+                <textarea type="text" name="beer" placeholder="What'll it be?"></textarea><br>
                 <!-- submit drink order area -->
-                <button type="button" class="btn btn-danger btn-block" id="submit">Submit</button>
+                <button type="submit" class="btn btn-danger" id="order">Order A Beer</button>
             </form>
         </div>
         <!-- bottle recycling -->
         <div class="col-lg-4 text-center" id="mt-beer">
+            <ol>
+                {{#each chugged}}
+                <ul>
+                    <p>
+                        <textarea>{{this.id}}. {{this.beer}}</textarea>
+                    </p>
+                </ul>
+                {{/each}}
+            </ol>
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    $('#order').on('submit', (event) => {
+
+        event.preventDefault();
+
+        var beer = {
+
+            beer: $('#bartender[name=beer]').val().trim()
+        }
+    });
+
+
+</script>
