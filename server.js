@@ -83,12 +83,27 @@ app.post('/new/chug', (req, res) => {
 
     console.log(req.body);
 
-    var beerId = parseFloat(req.body.id);
+    var beerId = parseInt(req.body.id);
+
+    console.log(beerId);
     
-    conn.query('UPDATE beer SET (?) WHERE (?);', [{chugged: '1'}, {id: beerId}], (error, data) => {
+     conn.query('UPDATE beer SET chugged = (?) WHERE id = (?)', ["1", beerId], (error, data) => {
 
-        if (error){
+         if (error){
 
+             throw error;
+         }
+
+        res.redirect('/');
+    });
+});
+
+app.post('/recycling', (req, res) => {
+
+    conn.query('DELETE FROM beer', (error, data) => {
+
+        if(error){
+            
             throw error;
         }
 
