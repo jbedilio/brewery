@@ -6,21 +6,21 @@
     <div class="row">
         <div class="col-lg-4 text-center" id="full-beer">
             <ol>
-                {{#each beer}}
+                {{#each beer}}{{#unless chugged}}
                 <ul>
-                    <p>
-                        <textarea>{{this.id}}. {{this.beer}}</textarea>
-                        <button data-beer='{{this.status}}' id="chug">Chug it!</button>
-                    </p>
+                    <form action="/new/chug" method="POST" id="bottomsUp">
+                        <textarea name="id" value="{{this.id}}" chugged="{{this.chugged}}">{{this.id}} {{this.beer}}</textarea>
+                        <button type="submit" id="chug">Chug it!</button>
+                    </form>
                 </ul>
-                {{/each}}
+                {{/unless}}{{/each}}
             </ol>
         </div>
         <!-- bar -->
         <div class="col-lg-4 text-center">
             <form action="/new" method="POST" id="bartender">
                 <!-- text input -->
-                <textarea type="text" name="beer" placeholder="What'll it be?"></textarea><br>
+                <textarea type="text" name="beer" value="{{this.id}}" placeholder="What'll it be?"></textarea><br>
                 <!-- submit drink order area -->
                 <button type="submit" class="btn btn-danger" id="order">Order A Beer</button>
             </form>
@@ -28,13 +28,13 @@
         <!-- bottle recycling -->
         <div class="col-lg-4 text-center" id="mt-beer">
             <ol>
-                {{#each chugged}}
+                {{#each beer}}{{#if chugged}}
                 <ul>
-                    <p>
+                    <p chugged={{this.chugged}}>
                         <textarea>{{this.id}}. {{this.beer}}</textarea>
                     </p>
                 </ul>
-                {{/each}}
+                {{/if}}{{/each}}
             </ol>
         </div>
     </div>
@@ -47,7 +47,17 @@
 
         var beer = {
 
-            beer: $('#bartender[name=beer]').val().trim()
+            beer: $('#bartender').val().trim()
+        }
+    });
+
+    $('#chug').on('submit', (event) => {
+
+        event.preventDefault();
+        
+        var id = {
+
+            id: $('#bottomsUp').val().trim()
         }
     });
 

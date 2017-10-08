@@ -55,7 +55,7 @@ conn.connect((error) => {
 
 app.get('/', (req, res) => {
 
-    conn.query('SELECT * FROM beer WHERE status="0";', (error, data) => {
+    conn.query('SELECT * FROM beer;', (error, data) => {
 
         if (error) throw error;
 
@@ -68,21 +68,33 @@ app.post('/new', (req, res) => {
 
     console.log(req.body.beer);
 
-    conn.query('INSERT INTO beer (beer) VALUES ("' + [req.body.beer] + '")', function (err, result) {
+    conn.query('INSERT INTO beer (beer) VALUES (?)', [req.body.beer], (error, result) => {
 
-        if (err) { throw err; }
+        if (error){
 
-        res.redirect("/");
+            throw error; 
+        }
+
+        res.redirect('/');
     });
-    
-    // conn.query('INSERT INTO beer (beer) VALUES (?)', [req.body.beer], (error, res) => {
-        
-    //     if (error) throw error;
-
-    //     res.redirect('/');
-    // });
 });
 
+app.post('/new/chug', (req, res) => {
+
+    console.log(req.body);
+
+    var beerId = parseFloat(req.body.id);
+    
+    conn.query('UPDATE beer SET (?) WHERE (?);', [{chugged: '1'}, {id: beerId}], (error, data) => {
+
+        if (error){
+
+            throw error;
+        }
+
+        res.redirect('/');
+    });
+});
 //importing my route modules & calling the functions that house them
 // const htmlR = require('./app/routing/htmlRoutes.js');
 // htmlR(app, __dirname);

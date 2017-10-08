@@ -9,7 +9,7 @@ CREATE TABLE beer (
 
     `beer` VARCHAR(100) NOT NULL,
 
-    `status` BOOLEAN DEFAULT false,
+    `chugged` BOOLEAN DEFAULT false,
 
     PRIMARY KEY (`id`)
 );
