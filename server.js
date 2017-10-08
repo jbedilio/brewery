@@ -98,12 +98,12 @@ app.post('/new/chug', (req, res) => {
     });
 });
 
-app.post('/recycling', (req, res) => {
+app.post('/new/recycling', (req, res) => {
 
-    conn.query('DELETE FROM beer', (error, data) => {
+    conn.query('DELETE FROM beer;', (error, data) => {
 
         if(error){
-            
+
             throw error;
         }
 
